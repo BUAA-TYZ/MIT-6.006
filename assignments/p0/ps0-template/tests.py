@@ -22,6 +22,18 @@ tests = (
         (11, 16, 10, 19, 20, 18, 3, 19, 2, 1, 8, 17, 7, 13, 1, 11, 1, 18, 19, 9, 7, 19, 24, 2, 12),
         4,
     ),
+    (
+        (1, 1, 1, 1),
+        4,
+    ),
+    (
+        (5, 6, 7, 1, 2, 3, 4, 5, 6),
+        1,
+    ),
+    (
+        (7, 6, 5, 1, 2, 3, 0, 4, 5, 1),
+        2,
+    ),
 )
 
 def check(test):
@@ -35,6 +47,8 @@ class TestCases(unittest.TestCase):
     def test_03(self): self.assertTrue(check(tests[ 2]))
     def test_04(self): self.assertTrue(check(tests[ 3]))
     def test_05(self): self.assertTrue(check(tests[ 4]))
+    def test_06(self): self.assertTrue(check(tests[ 5]))
+    def test_07(self): self.assertTrue(check(tests[ 6]))
 
 if __name__ == '__main__':
    res = unittest.main(verbosity = 3, exit = False)
