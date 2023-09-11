@@ -49,6 +49,7 @@ class TestCases(unittest.TestCase):
     def test_05(self): self.assertTrue(check(tests[ 4]))
     def test_06(self): self.assertTrue(check(tests[ 5]))
     def test_07(self): self.assertTrue(check(tests[ 6]))
+    def test_08(self): self.assertTrue(check(tests[ 7]))
 
 if __name__ == '__main__':
    res = unittest.main(verbosity = 3, exit = False)
