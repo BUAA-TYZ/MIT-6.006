@@ -1,0 +1,231 @@
+%
+% 6.006 problem set 1 solutions template
+%
+\documentclass[12pt,twoside]{article}
+
+\input{macros-sp20}
+\newcommand{\theproblemsetnum}{1}
+
+\title{6.006 Problem Set 1}
+
+\begin{document}
+
+\handout{Problem Set \theproblemsetnum}
+
+\setlength{\parindent}{0pt}
+\medskip\hrulefill\medskip
+
+{\bf Name:} BUAA-TYZ
+
+\medskip
+
+{\bf Collaborators:} ZR!
+
+\medskip\hrulefill
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% See below for common and useful latex constructs. %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Some useful commands:
+%$f(x) = \Theta(x)$
+%$T(x, y) \leq \log(x) + 2^y + \binom{2n}{n}$
+% {\tt code\_function}
+
+
+% You can create unnumbered lists as follows:
+%\begin{itemize}
+%    \item First item in a list
+%        \begin{itemize}
+%            \item First item in a list
+%                \begin{itemize}
+%                    \item First item in a list
+%                    \item Second item in a list
+%                \end{itemize}
+%            \item Second item in a list
+%        \end{itemize}
+%    \item Second item in a list
+%\end{itemize}
+
+% You can create numbered lists as follows:
+%\begin{enumerate}
+%    \item First item in a list
+%    \item Second item in a list
+%    \item Third item in a list
+%\end{enumerate}
+
+% You can write aligned equations as follows:
+%\begin{align}
+%    \begin{split}
+%        (x+y)^3 &= (x+y)^2(x+y) \\
+%                &= (x^2+2xy+y^2)(x+y) \\
+%                &= (x^3+2x^2y+xy^2) + (x^2y+2xy^2+y^3) \\
+%                &= x^3+3x^2y+3xy^2+y^3
+%    \end{split}
+%\end{align}
+
+% You can create grids/matrices as follows:
+%\begin{align}
+%    A =
+%    \begin{bmatrix}
+%        A_{11} & A_{21} \\
+%        A_{21} & A_{22}
+%    \end{bmatrix}
+%\end{align}
+
+% You can include images and PDFs as follows:
+% \includegraphics[width=0.5\textwidth]{img.jpg}
+
+\begin{problems}
+
+\problem  % Problem 1
+
+\begin{problemparts}
+\problempart % Problem 1a
+Known: $f_1=nlog(n),f_2=(logn)^n,f_3=6606log(n),f_4=(logn)^{6606},f_5=loglog(6606n)$
+
+\begin{itemize}
+    \item $\lim_{n\to \infty}\frac{f_1}{f_2}=\lim_{n\to \infty}e^{ln\frac{n}{(logn)^{n-1}}}=
+        \lim_{n\to \infty}e^{lnn-(n-1)*lnlogn}$
+    \item Obviously, $\lim_{n\to \infty}lnlogn>1\;and\;lnn<(n-1)$.
+    \item We get $\lim_{n\to \infty}\frac{f_1}{f_2}=0$, which means that $f_1=o(f_2)$
+    \item Because the monotone of $log$, we get the answer: $\{f_5,f_3,f_4,f_1,f_2\}$
+\end{itemize}
+
+\problempart % Problem 1b
+Known: $f_1=2^n,f_2=6006^n,f_3=2^{6606^n},f_4=6606^{2^n},f_5=6606^{n^2}$
+
+\begin{itemize}
+    \item Compare $f_2,f_4,f_5\Leftrightarrow  n,2^n,n^2$, we get $\{f_2,f_5,f_4\}$ at first. 
+    \item $\lim_{n\to \infty}\frac{f4}{f3}=\lim_{n\to \infty}e^{lnf_4-lnf_3}=$
+            $\lim_{n\to \infty}e^{2^nln6606-6606^nln2}=0$.
+    \item Finally, we get the answer: $\{f_1,f_2,f_5,f_4,f_3\}$.
+\end{itemize}
+
+\problempart % Problem 1c
+Known: $f_1=n^n,f_2=\binom{n}{n-6}=O(n^6),f_3=(6n)!,f_4=\binom{n}{n/6}=O(n^n),f_5=n^6$,
+which we already get $\{f_2,f_5\},\{f_1,f_4\}$
+
+\begin{itemize}
+    \item $\frac{f_1}{f_3}=\frac{n^n}{6n*6(n-1)...(5n+1)(5n)!}<\frac{1}{(5n)!}\xrightarrow[n\to\infty]{}0$. 
+    \item Finally, we get the answer: \sout{$\{\{f_2,f_5\},\{f_1,f_4\},f_3\}$}
+\end{itemize}
+
+\textcolor{red}{Solution: Stirling's approximation: $n!\simeq\sqrt{2\pi n}(\frac{n}{e})^n$. \\
+\begin{align}
+f_4 &= \binom{n}{n/6}=\frac{n!}{(\frac{n}{6})!(\frac{5n}{6})!} \\
+    &\simeq \frac{\sqrt{2\pi n}n^n}{2\pi n(\frac{n}{6})^n(5)^{\frac{5n}{6}}}\quad
+    by\;using\;Stirling's approximation \\
+    &\simeq \frac{6^n}{\sqrt{n}(5)^{\frac{5n}{6}}} 
+\end{align}
+We can conclude that $f_4<f_1$
+}
+
+\problempart % Problem 1d
+Known $f_1=n^{n+4}+n!,f_2=n^{7\sqrt{n}},f_3=4^{3nlogn},f_4=7^{n^2},f_5=n^12+1/n$
+
+\begin{itemize}
+    \item We get $f_5,f_2\;and\;f_3,f_4$ at first. Use the same method as above,
+          we get $f_2,f_3$
+    \item $n!=e^{ln1+1n2+...+1nn}<e^{nlnn}\;and\;n^{n+4}=e^{(n+4)lnn}$
+    \item As consequence, $f_1=O(e^{nlnn})<f_3$. We get the answer: $\{f_5,f_2,f_1,f_3,f_4\}$
+\end{itemize}
+
+\end{problemparts}
+
+\problem  % Problem 2
+
+\begin{problemparts}
+\problempart % Problem 2a
+\begin{itemize}
+    \item Algorithm description: The naive idea is that we delete the k elements 
+    and store them in a buffer. Then insert them reversely back into D.
+    \item Time analysis: $2klogn=O(klogn)$
+    \item Optimization: A better idea for this is to swap elements at index 
+    i and index i + k - 1, which only needs one loop.
+\end{itemize}
+\begin{lstlisting}
+def reverse(D, i, k):
+    if k <= 1:
+        return
+    back = D.delete_at(i + k - 1)
+    front = D.delete_at(i);    
+    D.insert_at(i, back)
+    D.insert_at(i + k - 1, front)
+    reverse(D, i + 1, k - 2)
+\end{lstlisting}
+
+\problempart % Problem 2b
+\begin{itemize}
+    \item Algorithm description: If $i < j$, then we are already done. Otherwise, we move
+    directly by copying elements one by one.
+    \item Time analysis: $2klogn=O(klogn)$ 
+\end{itemize}
+\begin{lstlisting}
+def move(D, i, k, j):
+    if k <= 0 || i < j :
+        return
+    for _ in range(0, k):
+        x = D.delete_at(i + k - 1)
+        D.insert_at(j, x)
+\end{lstlisting}
+\end{problemparts}
+
+\problem  % Problem 3
+\begin{itemize}
+    \item Algorithm description: Use a dynamic array before A. Use two deques between A and B and after B.
+    \item Time analysis: 
+        \begin{itemize}
+            \item build(X): $O(|X|)$. just insert one by one. 
+            \item place mark(i, m): worst case: $O(n)$. Put the bookmark will force the array or deque
+            to move all data before or after index i to another array or deque.
+            \item read page(i): $O(1)$. Obviously.
+            \item shift mark(m, d): $O(1)$. Shift mark with one step means move a element in deque to 
+            another array or deque.
+            Popback of array and popfront of deque cost constant time.
+            Pushfront or pushback of deque also cost constant time.
+            \item move page(m): $O(1)$. Same reason as above.
+        \end{itemize}
+\end{itemize}
+
+\problem  % Problem 4
+
+\begin{problemparts}
+\problempart % Problem 4a
+\begin{itemize}
+    \item insert\_first(x): 
+    If L.head is None, which means L is empty. 
+    Then let L.head and L.tail point to x.
+    Otherwise, let x.next point to L.head and L.head.prev point to x.
+    Then modify L.head to x.
+    \item inser\_last(x): 
+    If L.tail is None, which means L is empty.
+    Then let L.head and L.tail point to x.
+    Otherwise, let x.prev point to L.tail and L.tail.next point to x.
+    Then modify L.tail to x.
+    \item delete\_first(): 
+    Let L.head point to L.head.next. Modify L.head.prev to None.
+    (For python, there is no need to delete L.head mannully beacause of GC)
+    \item delete\_last(): 
+    Let L.tail point to L.tail.prev. Modify L.tail.next to None. 
+\end{itemize}
+\problempart % Problem 4b
+\begin{enumerate}
+    \item Create a double-linked list L', whose head and tail are x1 and x2 separately.
+    \item Let x1.prev.next point to x2.next
+    \item \textcolor{red}{If x2.next is not None, then let x2.next.prev point to x1.prev.}
+    \item Set L'.head.prev and L'.tail.next to None.
+\end{enumerate}
+\problempart % Problem 4c
+\begin{enumerate}
+    \item Let L2.head.prev point to x and L2.tail.next point to x.next
+    \item Let x.next point to L2.head
+    \item \textcolor{red}{If L2.tail.next is not None, then let L2.tail.next.prev point to L2.tail}
+    \item Set L2.head and L2.tail to None.
+\end{enumerate}
+\problempart Submit your implementation to {\small\url{alg.mit.edu}}.
+\end{problemparts}
+
+\end{problems}
+
+\end{document}
