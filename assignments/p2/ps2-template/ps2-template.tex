@@ -92,33 +92,37 @@ $T(n)=4T(\frac{n}{2})+O(n)$
 \begin{center}
 \Tree
 [.\node[draw]{$cn$}; 
-[.\node[draw]{$ $}; 
-[.\node[draw]{$\,$};]
-[.\node[draw]{$\,$};]
-[.\node[draw]{$\,$};]
-[.\node[draw]{$\,$};]
-] 
-[.\node[draw]{$\,$}; 
-[.\node[draw]{$\,$};]
-[.\node[draw]{$\,$};]
-[.\node[draw]{$\,$};]
-[.\node[draw]{$\,$};]
-] 
-[.\node[draw]{$\,$}; 
-[.\node[draw]{$\,$};]
-[.\node[draw]{$\,$};]
-[.\node[draw]{$\,$};]
-[.\node[draw]{$\,$};]
+[.\node[draw]{$c\frac{n}{2^i}$}; 
+[.\node[draw]{$c$};] 
+[.\node[draw]{$c$};] 
+[.\node[draw]{$c$};] 
+[.\node[draw]{$c$};] 
 ] 
 [.\node[draw]{$c\frac{n}{2^i}$}; 
-[.\node[draw]{$\,$};] 
-[.\node[draw]{$\,$};] 
-[.\node[draw]{$\,$};] 
+[.\node[draw]{$c$};] 
+[.\node[draw]{$c$};] 
+[.\node[draw]{$c$};] 
+[.\node[draw]{$c$};] 
+] 
+[.\node[draw]{$c\frac{n}{2^i}$}; 
+[.\node[draw]{$c$};] 
+[.\node[draw]{$c$};] 
+[.\node[draw]{$c$};] 
+[.\node[draw]{$c$};] 
+] 
+[.\node[draw]{$c\frac{n}{2^i}$}; 
+[.\node[draw]{$c$};] 
+[.\node[draw]{$c$};] 
+[.\node[draw]{$c$};] 
 [.\node[draw]{$c$};] 
 ] 
 ]
 \end{center}
-$T(n)=\sum_{i=0}^{logn}4^i\frac{n}{2^i}=n\sum_{i=0}^{logn}2^i=n(2n-1)=\Theta(n^2)$
+$T(n)=\sum_{i=0}^{logn}4^i\frac{n}{2^i}=n\sum_{i=0}^{logn}2^i=n(2n-1)=O(n^2)$
+
+In another hand, there are $4^{log_2n}=n^2$ leaves. And $T(1)=\Theta(1)$,
+we deduce that $T(n)=\Omega(n^2)$. As consequence, $T(n)=\Theta(n^2)$
+
 
 \problempart % Problem 1b
 \begin{align}   
@@ -140,14 +144,29 @@ $T(n)=\sum_{i=0}^{logn}4^i\frac{n}{2^i}=n\sum_{i=0}^{logn}2^i=n(2n-1)=\Theta(n^2
 
 \begin{problemparts}
 \problempart % Problem 2a
+The problem requires the algorithm to be in-place, which excludes the merge sort.
+$D.set\_at(i, x)$ costs $\Theta(nlogn)$ and each swap operation calls $D.set\_at(i, x)$
+twice, which is definitely inefficient. So we want to choose \textbf{the algorithm which 
+needs fewer swaps}. And the answer for that \textbf{is selection sort}, which needs $\Theta(n)$
+swaps at worst. In this case, $T(n)=O(n(n+nlogn))=O(n^2logn)$. In contrast, insertion
+sort will perform $\Theta(n^2)$ times swaps in worst case, which leads $T(n)=O(n^3logn)$
+
 \problempart % Problem 2b
+In this case, comparison is an expensive operation. As a result, we want to choose
+\textbf{the algorithm which needs fewer comparisons}. And the answer for that is 
+\textbf{merge sort}. For selection sort and insertion sort, they need $n^2$ times comparisons.
+For merge sort, it needs $nlog_2n$ times comparisons.
+
 \problempart % Problem 2c
+In this case, the array is basiclly sorted because even for $n=10^9, loglogn\simeq5$.
+In addition, swaps are adjacent. So the answer is absolutely insertion sort.
+In this case, $T(n)=\Theta(n)$, which is linear time.
+
 \end{problemparts}
 
-\newpage
 \problem  % Problem 3
+Pass
 
-\newpage
 \problem  % Problem 4
 
 \newpage
