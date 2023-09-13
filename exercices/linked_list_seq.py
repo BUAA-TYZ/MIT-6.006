@@ -66,48 +66,34 @@ class LinkedListSeq:
 
     def insert_last(self, x):
         'Insert at the tail of list.'
-        if self.size == 0:
-            self.insert_first(x)
-            return
-        x = LinkedListNode(x)
-        self.head.later_node(self.size - 1).next = x
-        self.size += 1
+        self.insert_at(self.size, x)
 
     def delete_last(self):
         'Delete the tail of list.'
-        if self.size <= 1:
-            self.delete_first()
-            return
-        self.head.later_node(self.size - 2).next = None
-        self.size -= 1
+        self.delete_at(self.size - 1)
 
     def insert_at(self, i, x):
         'Insert x at ith position of list.'
         if i == 0:
             self.insert_first(x)
             return
-        if i == self.size:
-            self.insert_last(x)
-            return
-        if i > self.size:
-            return
+
+        assert i <= self.size
         x = LinkedListNode(x)
         front = self.head.later_node(i - 1)
-        back = front.next
+        x.next = front.next
         front.next = x
-        x.next = back
         self.size += 1
 
     def delete_at(self, i):
         'Delete ith element.'
         if i == 0:
             self.delete_first()
-        elif i == self.size - 1:
-            self.delete_last()
-        elif i < self.size - 1:
-            front = self.head.later_node(i - 1)
-            front.next = front.next.next
-            self.size -= 1
+            return
+        assert i < self.size
+        front = self.head.later_node(i - 1)
+        front.next = front.next.next
+        self.size -= 1
 
 class TestLinkedList(unittest.TestCase):
     'Test Class'
