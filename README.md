@@ -1,6 +1,6 @@
 ### LECTURE 1: ALGORITHM AND COMPUTATION
-In this lecture, i revised the **big O notation**, where i know how to represent a algorithm by $\Theta$ or $
-O$ or $\Omega$.
+In this lecture, i revised the **big O notation**, where i know how to represent a algorithm by $\Theta$ or 
+$O$ or $\Omega$.
 
 *2023.09.11*
 
