@@ -168,6 +168,35 @@ In this case, $T(n)=\Theta(n)$, which is linear time.
 Pass
 
 \problem  % Problem 4
+\begin{itemize}
+    \item 
+    Description: There are no more people to join in, so we can use a sorted-array that stores
+    unique interger ID. Then, each person has three data structures: a time-list, a hash table 
+    and a dynamic-array. The time-list stores the unique ID by FIFO. And the key of hash table
+    is unique ID, the value of hash table is the message set which is also ordered by FIFO. 
+    The dynamic-array records the index of people who receive the message.
+    \item
+    Time analysis: So $build(V)$ is $O(nlogn)$ for a sorted-array. 
+    
+    $send(v, m)$ is divided into two procedures:
+    \begin{enumerate}
+        \item Find the people according to ID, which costs $O(logn)$. And append the index into 
+        the back of dynamic-array, which costs $O(1)$
+        \item For people v: append the ID into the time-list and {ID, message} into the hash
+        table, which are $O(1)$
+    \end{enumerate}
+
+    $recent(k)$ according to time-list, return the message. Here maybe needs extra space to 
+    record how many times of a ID appears.
+
+    $ban(v)$: Find the people according to ID, which costs $O(logn)$. And use the index in 
+    dynamic-array to find the $n_v$ people. Delete messages in hash table. 
+
+\end{itemize}
+\textcolor{red}{Solution: See the pdf, which maintains only two data structures. In fact, i
+misunderstood the recent function here. The real meaning of recent is to return the k messages 
+been sent, not been received.}
+
 
 \newpage
 \problem  % Problem 5
