@@ -5,7 +5,7 @@ $O$ or $\Omega$.
 *2023.09.11*
 
 ### ASSIGNMENT 0
-I installed Latex and equipe Vscode with it. I learned the grammar of Latex, which is a bit complex.
+I installed Latex and equipeed Vscode with it. I learned the grammar of Latex, which is a bit complex.
 
 *2023.09.11*
 
@@ -48,13 +48,29 @@ But use these three sorts, time complexity reaches $O(n)$.
 
 *2023.09.13*
 
+##### Thinking
+[为什么时效上具有明显优势的基数排序（radix sort）没有快速排序流行？--知乎](https://www.zhihu.com/question/27064078)
+总的来说，基数排序对特定数据排序都是有优势的，如整数、字符串都可以基数排序，缺点就是**占用空间**（不稳定版本似乎不占额外空间）并且不好抽象，无法作为泛型算法。反观标准库算法：`std::sort()`就足够 General。
+
+*2023.09.14*
+
 ### ASSIGNMEN 3
 I learned how to draw a hash table in Latex. Be more familiar with Linear sorts.
 
 *2023.09.14*
 
 ### LECTURE 6: BINARY TREES, PART 1, PART 2: AVL
-I have already learned. As consequence, nothing here.
+I have already learned. As consequence, nothing new here.
+
+### Thinking
+[为什么STL和linux都使用红黑树作为平衡树的实现？ - 知乎](https://www.zhihu.com/question/20545708)
+下面这段话是 Linux 内核为什么使用红黑树的原因：
+> Red-black trees are similar to AVL trees, but provide faster real-time boundedworst case performance for insertion and deletion (at most two rotations andthree rotations, respectively, to balance the tree), with slightly slower(but still O(log n)) lookup time.
+
+对于 Rust，它的 Set 是用 B树 维护的，这是很新颖的地方：
+[为什么Rust 标准库的 TreeMap 采用 B 树实现，而不是常用的红黑树？ - 知乎](https://www.zhihu.com/question/516912481)
+总的来说是因为 CPU 越来越快，而内存速度停滞不前。选取例如八叉树，能使一次装入更多东西到 Cache.
+这里我的理解是原先比如数据库使用 B+树 作索引，是把 Memory 当 Destination，Disk 当 Source. 现在 Source 变成 Memory，而 Destination 变成 CPU Cache 
 
 *2023.09.14*
 
