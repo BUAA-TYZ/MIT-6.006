@@ -1,19 +1,14 @@
 #include <iostream>
+#include <gtest/gtest.h>
 
 #include "avl.h"
 
-int main() {
-    AVLTree T = AVLTree();
-    auto l = {2, 1, 5, 4, 6, 3};
-    T.build(l);
-    AVLNode *a = T.find(5);
-    AVLNode *b = T.find(4);
-    AVLNode *c = T.find(7);
-
-    std::cout << (T.find(1) ? "True" : "False") << std::endl;
-    std::cout << (T.find(2) ? "True" : "False") << std::endl;;
-    std::cout << (T.find(3) ? "True" : "False") << std::endl;;
-    std::cout << (b->checkchild(a, c) ? "True" : "False") << std::endl;;
-    std::cout << a->height() << std::endl; 
-    std::cout << b->height() << std::endl; 
+int main(int argc, char **argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    std::cout << "RUNNING TESTS ..." << std::endl;
+    int ret{RUN_ALL_TESTS()};
+    if (!ret)
+        std::cout << "<<<SUCCESS>>>" << std::endl;
+    else
+        std::cout << "FAILED" << std::endl;
 }
