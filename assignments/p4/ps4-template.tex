@@ -15,11 +15,11 @@
 \setlength{\parindent}{0pt}
 \medskip\hrulefill\medskip
 
-{\bf Name:} Your Name
+{\bf Name:} BUAA-TYZ
 
 \medskip
 
-{\bf Collaborators:} Name1, Name2
+{\bf Collaborators:} None
 
 \medskip\hrulefill
 
@@ -82,8 +82,30 @@
 
 \begin{problemparts}
 \problempart % Problem 1a
+Node(37): Scew = 2 - 0 = 2
+Node(16): Scew = 1 - 3 = -2
+
 \problempart % Problem 1b
+\begin{center}
+\begin{tikzpicture}
+\tikzset{level distance=40pt, sibling distance=30pt}    
+\Tree
+[.\node[draw, circle]{$47$}; 
+[.\node[draw, circle]{$16$}; 
+[.\node[draw, circle]{$3$}; [.\node[draw, circle]{$2$}; ] ] 
+[.\node[draw, circle]{$37$}; [.\node[draw, circle]{$28$}; ] ] 
+] 
+[.\node[draw, circle]{$85$}; 
+[.\node[draw, circle]{$64$}; ] 
+[.\node[draw, circle]{$86$}; [.\node[draw, circle]{$88$}; ] ] 
+] 
+]
+\end{tikzpicture}
+\end{center}
+
 \problempart % Problem 1c
+Just do a rotation.
+
 \end{problemparts}
 
 \newpage
@@ -91,26 +113,62 @@
 
 \begin{problemparts}
 \problempart % Problem 2a
+\begin{center}
+    \begin{tikzpicture}
+    \tikzset{level distance=40pt, sibling distance=30pt}    
+    \Tree
+    [.\node[draw, circle]{$4$}; 
+    [.\node[draw, circle]{$12$}; 
+    [.\node[draw, circle]{$21$}; ]
+    [.\node[draw, circle]{$14$}; ]
+    ] 
+    [.\node[draw, circle]{$8$}; 
+    [.\node[draw, circle]{$9$}; ] 
+    [.\node[draw, circle]{$17$}; ] 
+    ] 
+    ]
+    \end{tikzpicture}
+\end{center}
+Minheap
 \problempart % Problem 2b
+Maxheap
 \problempart % Problem 2c
+Swap (13, 0) and then (2, 0)
 \problempart % Problem 2d
+Minheap
 \end{problemparts}
 
-\newpage
 \problem  % Problem 3
 
 \begin{problemparts}
 \problempart % Problem 3a
+\begin{itemize}
+    \item Build a heap according to score: $O(|A|)$
+    \item Delete max k times: $O(klog|A|)$
+\end{itemize}
+
+
 \problempart % Problem 3b
+Use heap tree properity to search the heap.
 \end{problemparts}
 
-\newpage
 \problem  % Problem 4
+$s_i$: address of farm $c_i$: capacity $b_j$: name of building $d_j$: demand of building
+\begin{itemize}
+    \item A hash table to record $(s_i, node)$ pair.
+    \item For each node, a hash table to record $(b_j, "")$ pair.
+    \item An max heap to store all node based on $c_i$.
+\end{itemize}
+Build: $O(n)$
+Power on: Find a node corrsponding to the condition $O(logn)$, add the name to 
+the hash table of the node. Change the capacity to $c_j - d_j$
+Power off: Find the node $O(logn)$, delete it in the hash table: $O(1)_{am}$
+Customers: Use hash table to find the node and return the hash table of the node.
 
 \newpage
 \problem  % Problem 5
+Pass problem 5 and 6, use the time to see the implementation of AVL Tree.
 
-\newpage
 \problem  % Problem 6
 \begin{problemparts}
 \problempart % Problem 6a

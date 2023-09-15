@@ -84,3 +84,23 @@ class Set_AVL_Tree(AVL_Tree):
         if ext.parent is None:  self.root = None
         self.size -= 1
         return ext.item
+
+class Obj:
+    def __init__(self) -> None:
+        self.key = None
+    def __str__(self) -> str:
+        return str(self.key)
+
+def main():
+    T = Set_AVL_Tree()
+    data = [10, 6, 8, 5, 1, 3]
+    D = [Obj() for _ in data]
+    for i in range(len(data)):
+        D[i].key = data[i]
+    T.build(D)
+    print(T.find_max().key)
+    print(T.find_min().key)
+    print(str(T))
+
+if __name__ == '__main__':
+    main()
