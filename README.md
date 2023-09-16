@@ -83,4 +83,7 @@ Sequence interface doesn't need to implement the sort semantic. So build a seque
 1. ~~write an AVL Tree, which stores the int.~~ (*Done at 2023.09.15*)
 2. change it to be general
 
+[Why can templates only be implemented in the header file?](https://stackoverflow.com/a/16493574)
+[模板类在.h中定义，在.cpp中实现 - 知乎](https://zhuanlan.zhihu.com/p/147623943)
+
 *2023.09.15*
