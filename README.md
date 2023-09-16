@@ -77,9 +77,10 @@ I have already learned. As consequence, nothing new here.
 *2023.09.14*
 
 ### ASSIGNMENT 4
-Sequence interface doesn't need to implement the sort semantic. So build a sequence AVL Tree is $O(n)$. Start to write a AVL Tree in C++.
+Sequence interface doesn't need to implement the sort semantic. So build a sequence AVL Tree is $O(n)$. Start to write a AVL Tree in C++. Introduce CMake and GTest in Windows10.
 
 #### TODO:
 1. ~~write an AVL Tree, which stores the int.~~ (*Done at 2023.09.15*)
 2. change it to be general
 
+*2023.09.15*
