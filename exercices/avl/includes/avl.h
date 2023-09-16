@@ -5,12 +5,19 @@
 #include <cassert>
 #include <cstdint>
 #include <initializer_list>
+#include <string>
 
-class AVLTree;
+#define TEMPLATE_ARGUMENT template<typename T, typename Compare>
+#define AVLNODE_TYPE AVLNode<T, Compare>
+
+TEMPLATE_ARGUMENT class AVLTree;
+
+template<typename T, typename Compare = std::less<T>>
 class AVLNode {
-	friend class AVLTree;
+	friend class AVLTree<T, Compare>;
 public:
-  explicit AVLNode(int data): data_(data) {}
+  explicit AVLNode(T data, Compare comparator)
+	: data_(std::move(data)), comparator_(std::move(comparator)) {}
 
 	void update_height() {
 		height_ = 1 + std::max((right_ ? right_->height_ : -1), (left_ ? left_->height_ : -1));
@@ -27,7 +34,7 @@ public:
 	AVLNode* predecessor();
 	AVLNode* successor();
 
-	AVLNode* find(int data);
+	AVLNode* find(T data);
 
 	/** rotate towawrds left, which means scew of node is 2.
 	 *    A              C
@@ -59,31 +66,38 @@ public:
 
 private:
   /** TODO: change it to general*/
-  int data_{0};
+  T data_{0};
 
   int32_t height_{0};
   AVLNode *parent_{nullptr};
   AVLNode *left_{nullptr};
   AVLNode *right_{nullptr};
+
+	Compare comparator_;
 };
+
+template<typename T, typename Compare = std::less<T>>
 class AVLTree {
 public:
-	AVLTree() = default;
-	void build(std::initializer_list<int> data_set) {
+	AVLTree() : comparator_(Compare()){}
+
+	explicit AVLTree(Compare comp) : comparator_(std::move(comp)) {}
+
+	void build(std::initializer_list<T> data_set) {
 		for(const auto &data: data_set) {
 			insert(data);
 			update_root();
 		}
 	}
 
-	AVLNode* find(int x) {
+	AVLNODE_TYPE* find(T x) {
 		if (!root)
 			return nullptr;
 		return root->find(x);
 	}
 
-	void insert(int x) {
-		AVLNode *new_node = new AVLNode(x);
+	void insert(T x) {
+		AVLNODE_TYPE *new_node = new AVLNODE_TYPE(x, comparator_);
 		if (root == nullptr) {
 			root = new_node;
 			return;
@@ -103,7 +117,8 @@ public:
 		DeleteAllNode(root);
 	}
 private:
-	AVLNode *root{nullptr};
+	AVLNODE_TYPE* root{nullptr};
+	Compare comparator_;
 
 	/** When in a rotation, the root maybe go down. */
 	void update_root() {
@@ -112,7 +127,7 @@ private:
 		}
 	}
 
-	void DeleteAllNode(AVLNode *cur) {
+	void DeleteAllNode(AVLNODE_TYPE *cur) {
 		if (!cur) return;
 		if (cur->left_) DeleteAllNode(cur->left_);
 		if (cur->right_) DeleteAllNode(cur->right_);
@@ -120,6 +135,6 @@ private:
 	}
 };
 
-// #include "avl.cpp"
+#include "avl.cpp"
 
 #endif

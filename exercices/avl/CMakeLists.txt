@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 17)
 enable_testing()
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/test/googletest-1.14.0)
-add_executable(main src/main.cpp src/avl.cpp src/unit_test.cpp)
+add_executable(main src/main.cpp src/unit_test.cpp)
 
 target_include_directories(main
     PRIVATE ${PROJECT_SOURCE_DIR}/includes)

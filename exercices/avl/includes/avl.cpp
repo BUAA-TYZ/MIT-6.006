@@ -3,24 +3,27 @@
 /******************************
  * Search Functions
  *****************************/
-AVLNode * AVLNode::subtree_first() {
-	AVLNode *cur = this;
+TEMPLATE_ARGUMENT
+AVLNODE_TYPE * AVLNODE_TYPE::subtree_first() {
+	AVLNODE_TYPE *cur = this;
 	while (cur->left_) {
 		cur = cur->left_;
 	}
 	return cur;
 }
 
-AVLNode * AVLNode::subtree_last() {
-	AVLNode *cur = this;
+TEMPLATE_ARGUMENT
+AVLNODE_TYPE * AVLNODE_TYPE::subtree_last() {
+	AVLNODE_TYPE *cur = this;
 	while (cur->right_) {
 		cur = cur->right_;
 	}
 	return cur;
 }
 
-AVLNode* AVLNode::predecessor() {
-		AVLNode *cur = this;
+TEMPLATE_ARGUMENT
+AVLNODE_TYPE * AVLNODE_TYPE::predecessor() {
+		AVLNODE_TYPE *cur = this;
 		if (cur->left_) { return cur->left_->subtree_last(); }
 		while (cur->parent_ && cur->parent_->left_ == cur) {
 			cur = cur->parent_;
@@ -28,8 +31,9 @@ AVLNode* AVLNode::predecessor() {
 		return cur->parent_;
 	}
 
-AVLNode* AVLNode::successor() {
-	AVLNode *cur = this;
+TEMPLATE_ARGUMENT
+AVLNODE_TYPE * AVLNODE_TYPE::successor() {
+	AVLNODE_TYPE *cur = this;
 	if (cur->right_) { return cur->right_->subtree_first(); }
 	while (cur->parent_ && cur->parent_->right_ == cur) {
 		cur = cur->parent_;
@@ -37,12 +41,13 @@ AVLNode* AVLNode::successor() {
 	return cur->parent_;
 }
 
-AVLNode* AVLNode::find(int data) {
-	if (data < data_) {
+TEMPLATE_ARGUMENT
+AVLNODE_TYPE * AVLNODE_TYPE::find(T data) {
+	if (comparator_(data, data_)) {
 		if (left_) {
 			return left_->find(data);
 		}
-	} else if (data > data_) {
+	} else if (comparator_(data_, data)) {
 		if (right_) {
 			return right_->find(data);
 		}
@@ -55,9 +60,10 @@ AVLNode* AVLNode::find(int data) {
 /******************************
  * Balance Functions
  *****************************/
-void AVLNode::left_rotation() {
+TEMPLATE_ARGUMENT
+void AVLNODE_TYPE::left_rotation() {
 	assert(right_);
-	AVLNode *A = this, *B = left_, *C = right_,
+	AVLNODE_TYPE *A = this, *B = left_, *C = right_,
 					*D = right_->left_, *E = right_->right_;
 	// A, C is not nullptr.
 	if (A->parent_) {
@@ -75,9 +81,10 @@ void AVLNode::left_rotation() {
 	C->update_height();
 }
 
-void AVLNode::right_rotation() {
+TEMPLATE_ARGUMENT
+void AVLNODE_TYPE::right_rotation() {
 	assert(left_);
-	AVLNode *A = this, *B = left_, *C = left_->left_,
+	AVLNODE_TYPE *A = this, *B = left_, *C = left_->left_,
 					*D = left_->right_, *E = right_;
 	// A, B is not nullptr.
 	if (A->parent_) {
@@ -95,7 +102,8 @@ void AVLNode::right_rotation() {
 	B->update_height(); 
 }
 
-void AVLNode::rebalance() {
+TEMPLATE_ARGUMENT
+void AVLNODE_TYPE::rebalance() {
 	if (skew() == 2) {
 		if (right_->skew() < 0) 
 			right_->right_rotation();
@@ -107,7 +115,8 @@ void AVLNode::rebalance() {
 	}
 }
 
-void AVLNode::maintain() {
+TEMPLATE_ARGUMENT
+void AVLNODE_TYPE::maintain() {
 	rebalance();
 	update_height();
 	if (parent_)	parent_->maintain();
@@ -116,10 +125,11 @@ void AVLNode::maintain() {
 /******************************
  * Insert Functions
  *****************************/
-void AVLNode::insert_before(AVLNode *insert_node) {
+TEMPLATE_ARGUMENT
+void AVLNODE_TYPE::insert_before(AVLNODE_TYPE *insert_node) {
 	assert(insert_node != nullptr);
 	if (left_) {
-		AVLNode *cur = nullptr;
+		AVLNODE_TYPE *cur = nullptr;
 		cur = left_->subtree_last();
 		cur->right_ = insert_node;
 		insert_node->parent_ = cur;
@@ -130,10 +140,11 @@ void AVLNode::insert_before(AVLNode *insert_node) {
 	maintain();
 }
 
-void AVLNode::insert_after(AVLNode *insert_node) {
+TEMPLATE_ARGUMENT
+void AVLNODE_TYPE::insert_after(AVLNODE_TYPE *insert_node) {
 	assert(insert_node != nullptr);
 	if (right_) {
-		AVLNode *cur = nullptr;
+		AVLNODE_TYPE *cur = nullptr;
 		cur = right_->subtree_first();
 		cur->left_ = insert_node;
 		insert_node->parent_ = cur;
@@ -145,13 +156,14 @@ void AVLNode::insert_after(AVLNode *insert_node) {
 }
 
 /** Not support replicated key. */
-void AVLNode::subtree_insert(AVLNode *insert_node) {
-	if (insert_node->data_ < data_) {
+TEMPLATE_ARGUMENT
+void AVLNODE_TYPE::subtree_insert(AVLNODE_TYPE *insert_node) {
+	if (comparator_(insert_node->data_, data_)) {
 		if (left_)
 			left_->subtree_insert(insert_node);
 		else
 			insert_before(insert_node);
-	} else if (insert_node->data_ > data_) {
+	} else if (comparator_(data_, insert_node->data_)) {
 		if (right_)
 			right_->subtree_insert(insert_node);
 		else
