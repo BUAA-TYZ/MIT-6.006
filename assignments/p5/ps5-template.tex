@@ -118,17 +118,21 @@ BFS: A B C D E F
 
 \newpage
 \problem  % Problem 2
+For each plant, it builds an undirected graph with supported buildings. 
+Do a BFS for each plant, which costs $O(|V|+|E|)$. And $|E|<=\binom{n^2}{2}=O(n^4)$,
+we salely conclude that this algorithm safisfies the need.
 
-\newpage
 \problem  % Problem 3
+If we think about the conception: Indegree, then it's easy. For a robot, if it's Indegree
+is two, then it's impossible to achieve the goal. So we just calculate the Indegree of each
+robot and judge whether it is smaller than 2. The algorithm scans all pairs once, which takes $O(n)$
 
-\newpage
 \problem  % Problem 4
+pass
 
-\newpage
 \problem  % Problem 5
 
-\newpage
+
 \problem  % Problem 6
 
 \begin{problemparts}
